@@ -1,3 +1,4 @@
+from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
 from django.contrib import admin
 from django.urls import include, path
 from rest_framework import routers
@@ -12,5 +13,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls',
-         namespace='rest_framework'))
+         namespace='rest_framework')),
+    path('login/', obtain_jwt_token),
+    path('refresh-token/', refresh_jwt_token),
 ]
