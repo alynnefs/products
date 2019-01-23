@@ -1,0 +1,5 @@
+-r common.txt
+flake8==3.6.0
+ipdb==0.11
+ipython==7.2.0
+pylint==2.2.2
