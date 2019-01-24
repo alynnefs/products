@@ -10,6 +10,9 @@ from .serializers import ProductSerializer
 
 
 class BaseViewTest(APITestCase):
+    """
+    This class creates test data
+    """
     client = APIClient()
 
     @staticmethod
@@ -27,6 +30,9 @@ class BaseViewTest(APITestCase):
 
 
 class GetAllProductsTest(BaseViewTest):
+    """
+    This class tests data creation
+    """
     def test_get_all_products(self):
 
         factory = APIRequestFactory()

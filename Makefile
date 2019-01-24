@@ -32,3 +32,7 @@ collectstatic:
 
 createsuperuser:
 	./djangoRest/manage.py createsuperuser
+
+html:
+	cd doc/ 
+	sphinx-build
