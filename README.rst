@@ -12,7 +12,7 @@ Requisitos
 - Python 3.6.7
 - pip 19.0.1 (python 3.6)
 
-Obs: todos os comandos a seguir devem ser executados na raiz do projeto (pasta products).
+Obs: todos os comandos a seguir devem ser executados na raiz do projeto (diretório products).
 
 Install
 =======
@@ -133,6 +133,297 @@ Resultado do filtro:
 
 .. image:: https://github.com/alynnefs/testeConceptu/blob/master/img/17.png
    :width: 600
+
+- Pelo terminal sem login:
+
+- CREATE
+
+.. code-block:: console
+
+   $ http --form POST http://127.0.0.1:8000/products/ name="post" price=1
+   HTTP/1.1 401 Unauthorized
+   Allow: GET, POST, HEAD, OPTIONS
+   Content-Length: 58
+   Content-Type: application/json
+   Date: Thu, 24 Jan 2019 17:42:10 GMT
+   Server: WSGIServer/0.2 CPython/3.6.7
+   Vary: Accept, Cookie
+   WWW-Authenticate: JWT realm="api"
+   X-Frame-Options: SAMEORIGIN
+
+   {
+       "detail": "Authentication credentials were not provided."
+   }
+
+- READ
+
+.. code-block:: console
+
+   $ http GET http://127.0.0.1:8000/products/
+   HTTP/1.1 401 Unauthorized
+   Allow: GET, POST, HEAD, OPTIONS
+   Content-Length: 58
+   Content-Type: application/json
+   Date: Thu, 24 Jan 2019 17:41:23 GMT
+   Server: WSGIServer/0.2 CPython/3.6.7
+   Vary: Accept, Cookie
+   WWW-Authenticate: JWT realm="api"
+   X-Frame-Options: SAMEORIGIN
+
+   {
+       "detail": "Authentication credentials were not provided."
+   }
+
+- UPDATE
+
+.. code-block:: console
+
+   $ http --form PUT http://127.0.0.1:8000/products/1/ name="testeUpdateHTTP" price=2
+   HTTP/1.1 401 Unauthorized
+   Allow: GET, PUT, PATCH, DELETE, HEAD, OPTIONS
+   Content-Length: 58
+   Content-Type: application/json
+   Date: Thu, 24 Jan 2019 17:43:28 GMT
+   Server: WSGIServer/0.2 CPython/3.6.7
+   Vary: Accept, Cookie
+   WWW-Authenticate: JWT realm="api"
+   X-Frame-Options: SAMEORIGIN
+
+   {
+       "detail": "Authentication credentials were not provided."
+   }
+
+- DELETE
+
+.. code-block:: console
+
+   $ http --form DELETE http://127.0.0.1:8000/products/1/
+   HTTP/1.1 401 Unauthorized
+   Allow: GET, PUT, PATCH, DELETE, HEAD, OPTIONS
+   Content-Length: 58
+   Content-Type: application/json
+   Date: Thu, 24 Jan 2019 17:44:06 GMT
+   Server: WSGIServer/0.2 CPython/3.6.7
+   Vary: Accept, Cookie
+   WWW-Authenticate: JWT realm="api"
+   X-Frame-Options: SAMEORIGIN
+
+   {
+       "detail": "Authentication credentials were not provided."
+   }
+
+Obs: Todos eles com a mensagem "Authentication credentials were not provided.", já que não informamos usuário e senha.
+
+- Pelo terminal com login:
+
+- READ
+
+.. code-block:: console
+
+   $ http GET http://127.0.0.1:8000/products/ --auth alynne:123456
+   HTTP/1.1 200 OK
+   Allow: GET, POST, HEAD, OPTIONS
+   Content-Length: 1413
+   Content-Type: application/json
+   Date: Thu, 24 Jan 2019 17:24:08 GMT
+   Server: WSGIServer/0.2 CPython/3.6.7
+   Vary: Accept, Cookie
+   X-Frame-Options: SAMEORIGIN
+
+   {
+       "count": 2,
+       "next": null,
+       "previous": null,
+       "results": [
+           {
+               "description": "adasds",
+               "name": "teste",
+               "price": 3.14,
+               "url": "http://127.0.0.1:8000/products/1/"
+           },
+           {
+               "description": null,
+               "name": "teste",
+               "price": 9.0,
+               "url": "http://127.0.0.1:8000/products/7/"
+           }
+       ]
+   }
+
+- CREATE
+
+.. code-block:: console
+
+
+   http --form POST http://127.0.0.1:8000/products/ name="testeHTTP" price=1.99 --auth alynne:123456
+   HTTP/1.1 201 Created
+   Allow: GET, POST, HEAD, OPTIONS
+   Content-Length: 95
+   Content-Type: application/json
+   Date: Thu, 24 Jan 2019 17:23:10 GMT
+   Location: http://127.0.0.1:8000/products/10/
+   Server: WSGIServer/0.2 CPython/3.6.7
+   Vary: Accept, Cookie
+   X-Frame-Options: SAMEORIGIN
+
+   {
+       "description": null,
+       "name": "testeHTTP",
+       "price": 1.99,
+       "url": "http://127.0.0.1:8000/products/10/"
+   }
+
+Resultado:
+
+.. code-block:: console
+
+   $ http GET http://127.0.0.1:8000/products/ --auth alynne:123456
+   HTTP/1.1 200 OK
+   Allow: GET, POST, HEAD, OPTIONS
+   Content-Length: 1413
+   Content-Type: application/json
+   Date: Thu, 24 Jan 2019 17:24:08 GMT
+   Server: WSGIServer/0.2 CPython/3.6.7
+   Vary: Accept, Cookie
+   X-Frame-Options: SAMEORIGIN
+
+   {
+       "count": 3,
+       "next": null,
+       "previous": null,
+       "results": [
+           {
+               "description": null,
+               "name": "testeHTTP",
+               "price": 1.99,
+               "url": "http://127.0.0.1:8000/products/10/"
+           },
+           {
+               "description": "adasds",
+               "name": "teste",
+               "price": 3.14,
+               "url": "http://127.0.0.1:8000/products/1/"
+           },
+           {
+               "description": null,
+               "name": "teste",
+               "price": 9.0,
+               "url": "http://127.0.0.1:8000/products/7/"
+           }
+       ]
+   }
+
+- UPDATE
+
+.. code-block:: console
+
+   $ http --form PUT http://127.0.0.1:8000/products/1/ name="testeUpdateHTTP" price=2 --auth alynne:123456
+   HTTP/1.1 200 OK
+   Allow: GET, PUT, PATCH, DELETE, HEAD, OPTIONS
+   Content-Length: 103
+   Content-Type: application/json
+   Date: Thu, 24 Jan 2019 17:27:10 GMT
+   Server: WSGIServer/0.2 CPython/3.6.7
+   Vary: Accept, Cookie
+   X-Frame-Options: SAMEORIGIN
+
+   {
+       "description": "adasds",
+       "name": "testeUpdateHTTP",
+       "price": 2.0,
+       "url": "http://127.0.0.1:8000/products/1/"
+   }
+
+Resultado:
+
+.. code-block:: console
+
+   $ http GET http://127.0.0.1:8000/products/ --auth alynne:123456
+   HTTP/1.1 200 OK
+   Allow: GET, POST, HEAD, OPTIONS
+   Content-Length: 1422
+   Content-Type: application/json
+   Date: Thu, 24 Jan 2019 17:27:32 GMT
+   Server: WSGIServer/0.2 CPython/3.6.7
+   Vary: Accept, Cookie
+   X-Frame-Options: SAMEORIGIN
+
+   {
+       "count": 3,
+       "next": null,
+       "previous": null,
+       "results": [
+           {
+               "description": "adasds",
+               "name": "testeUpdateHTTP",
+               "price": 2.0,
+               "url": "http://127.0.0.1:8000/products/1/"
+           },
+           {
+               "description": null,
+               "name": "testeHTTP",
+               "price": 1.99,
+               "url": "http://127.0.0.1:8000/products/10/"
+           },
+           {
+               "description": null,
+               "name": "teste",
+               "price": 9.0,
+               "url": "http://127.0.0.1:8000/products/7/"
+           }
+       ]
+   }
+
+- DELETE
+
+.. code-block:: console
+
+   $ http --form DELETE http://127.0.0.1:8000/products/7/ --auth alynne:123456
+   HTTP/1.1 204 No Content
+   Allow: GET, PUT, PATCH, DELETE, HEAD, OPTIONS
+   Content-Length: 0
+   Date: Thu, 24 Jan 2019 17:29:35 GMT
+   Server: WSGIServer/0.2 CPython/3.6.7
+   Vary: Accept, Cookie
+   X-Frame-Options: SAMEORIGIN
+
+
+Resultado
+
+.. code-block:: console
+
+   $ http GET http://127.0.0.1:8000/products/ --auth alynne:123456
+   HTTP/1.1 200 OK
+   Allow: GET, POST, HEAD, OPTIONS
+   Content-Length: 978
+   Content-Type: application/json
+   Date: Thu, 24 Jan 2019 17:29:57 GMT
+   Server: WSGIServer/0.2 CPython/3.6.7
+   Vary: Accept, Cookie
+   X-Frame-Options: SAMEORIGIN
+
+   {
+       "count": 2,
+       "next": null,
+       "previous": null,
+       "results": [
+           {
+               "description": "adasds",
+               "name": "testeUpdateHTTP",
+               "price": 2.0,
+               "url": "http://127.0.0.1:8000/products/1/"
+           },
+           {
+               "description": null,
+               "name": "testeHTTP",
+               "price": 1.99,
+               "url": "http://127.0.0.1:8000/products/10/"
+           }
+       ]
+   }
+
+
+Outros exemplos de obtenção de dados sem GET:
 
 - Pelo terminal com ``curl``
 
