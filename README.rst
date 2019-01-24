@@ -2,6 +2,10 @@
 DjangoRest
 ============================================
 
+.. image:: https://travis-ci.org/alynnefs/products.svg?branch=master
+    :target: https://travis-ci.org/alynnefs/products
+    :alt: Test Status
+    
 Esse projeto consiste em um CRUD de produtos.
 
 Primeiramente, clone o projeto. Instale python3 e pip. É aconselhado fazer isso em uma virtualenv.
