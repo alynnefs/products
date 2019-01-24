@@ -36,3 +36,5 @@ createsuperuser:
 test:
 	cd djangoRest/ && ./manage.py test
 
+showdoc:
+	cd djangoRest/doc/_build/html && firefox index.html
