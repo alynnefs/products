@@ -33,3 +33,6 @@ collectstatic:
 createsuperuser:
 	./djangoRest/manage.py createsuperuser
 
+test:
+	cd djangoRest/ && ./manage.py test
+
