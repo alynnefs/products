@@ -1,0 +1,26 @@
+language: python # => 1
+
+    python: # => 2
+
+      - "3.6.7"
+
+    services: # => 3
+
+      - sqlite
+
+    env: # => 4
+
+      -DJANGO=2.1.5 DB=sqlite
+
+    install: # => 5
+
+      - pip install -r requirements/dev.txt
+
+    before_script: # => 6
+
+      - ./djangoRest/manage.py makemigrations
+      - ./djangoRest/manage.py migrate
+
+    script: # => 7
+
+      - ./djangoRest/manage.py test
