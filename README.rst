@@ -19,6 +19,8 @@ Install
 
 .. code-block:: console
 
+    sudo apt install curl
+    sudo apt install httpie
     make setup
     
 Durante o setup será solicitado nome de usuário, email e senha, que serão usados para fazer login no sistema.
