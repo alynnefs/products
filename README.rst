@@ -44,7 +44,9 @@ Como executar
 
     make run
 
-Pelo navegador, acesse ``http://127.0.0.1:8000``. Você irá se deparar com a seguinte imagem:
+- Pelo navegador
+
+Acesse ``http://127.0.0.1:8000``. Você irá se deparar com a seguinte imagem:
 
 .. image:: https://github.com/alynnefs/testeConceptu/blob/master/img/01.png
    :width: 600
@@ -131,3 +133,238 @@ Resultado do filtro:
 
 .. image:: https://github.com/alynnefs/testeConceptu/blob/master/img/17.png
    :width: 600
+
+- Pelo terminal com ``curl``
+
+http://127.0.0.1:8000/
+
+.. code-block:: console
+
+    $ curl -H 'Accept: application/json; indent=4' http://127.0.0.1:8000/
+    {
+        "detail": "Authentication credentials were not provided."
+    }
+    
+http://127.0.0.1:8000/products/
+
+.. code-block:: console
+
+   $ curl -H 'Accept: application/json; indent=4' http://127.0.0.1:8000/products/
+   {
+        "detail": "Authentication credentials were not provided."
+   }
+   
+http://127.0.0.1:8000/products/1/
+
+.. code-block:: console
+
+   $ curl -H 'Accept: application/json; indet=4' http://127.0.0.1:8000/products/1/
+   {
+       "detail": "Authentication credentials were not provided."
+   }
+   
+Observe que todos possuem a resposta "Authentication credentials were not provided". Isso acontece porque não há nenhum usuário logado. Vamos usar usuário e senha criados no setup. Nesse exemplo, o usuário é "alynne" e a senha é "123456".
+
+http://127.0.0.1:8000/
+
+.. code-block:: console
+
+   $ curl -H 'Accept: application/json; indent=4' -u alynne:123456 http://127.0.0.1:8000/
+   {
+       "products": "http://127.0.0.1:8000/products/"
+   }
+
+http://127.0.0.1:8000/products/
+
+.. code-block:: console
+   
+   $ curl -H 'Accept: application/json; indet=4' -u alynne:123456 http://127.0.0.1:8000/products/
+   {
+       "count": 4,
+       "next": null,
+       "previous": null,
+       "results": [
+           {
+               "url": "http://127.0.0.1:8000/products/1/",
+               "name": "teste",
+               "price": 3.14,
+               "description": "adasds"
+           },
+           {
+               "url": "http://127.0.0.1:8000/products/2/",
+               "name": "produto2",
+               "price": 2.0,
+               "description": null
+           },
+           {
+               "url": "http://127.0.0.1:8000/products/3/",
+               "name": "produto",
+               "price": 1.0,
+               "description": null
+           },
+           {
+               "url": "http://127.0.0.1:8000/products/4/",
+               "name": "produto",
+               "price": 1.0,
+               "description": null
+           }
+       ]
+   }
+
+http://127.0.0.1:8000/products/1/
+
+.. code-block:: console
+
+   $ curl -H 'Accept: application/json; indet=4' -u alynne:123456 http://127.0.0.1:8000/products/1/
+   {
+       "url": "http://127.0.0.1:8000/products/1/",
+       "name": "teste",
+       "price": 3.14,
+       "description": "adasds"
+   }
+
+- Pelo terminal com ``http``
+
+http://127.0.0.1:8000/
+
+.. code-block:: console
+
+   $ http http://127.0.0.1:8000/
+   HTTP/1.1 401 Unauthorized
+   Allow: GET, HEAD, OPTIONS
+   Content-Length: 58
+   Content-Type: application/json
+   Date: Thu, 24 Jan 2019 16:05:52 GMT
+   Server: WSGIServer/0.2 CPython/3.6.7
+   Vary: Accept, Cookie
+   WWW-Authenticate: JWT realm="api"
+   X-Frame-Options: SAMEORIGIN
+
+   {
+       "detail": "Authentication credentials were not provided."
+   }
+   
+http://127.0.0.1:8000/products/
+
+.. code-block:: console
+
+   $ http http://127.0.0.1:8000/products/
+   HTTP/1.1 401 Unauthorized
+   Allow: GET, POST, HEAD, OPTIONS
+   Content-Length: 58
+   Content-Type: application/json
+   Date: Thu, 24 Jan 2019 16:06:11 GMT
+   Server: WSGIServer/0.2 CPython/3.6.7
+   Vary: Accept, Cookie
+   WWW-Authenticate: JWT realm="api"
+   X-Frame-Options: SAMEORIGIN
+
+   {
+       "detail": "Authentication credentials were not provided."
+   }
+
+http://127.0.0.1:8000/products/1/
+
+.. code-block:: console
+
+   $ http http://127.0.0.1:8000/products/1/
+   HTTP/1.1 401 Unauthorized
+   Allow: GET, PUT, PATCH, DELETE, HEAD, OPTIONS
+   Content-Length: 58
+   Content-Type: application/json
+   Date: Thu, 24 Jan 2019 16:06:32 GMT
+   Server: WSGIServer/0.2 CPython/3.6.7
+   Vary: Accept, Cookie
+   WWW-Authenticate: JWT realm="api"
+   X-Frame-Options: SAMEORIGIN
+
+   {
+       "detail": "Authentication credentials were not provided."
+   }
+
+Observe que todos possuem a resposta "Authentication credentials were not provided". Isso acontece porque não há nenhum usuário logado. Vamos usar usuário e senha criados no setup. Nesse exemplo, o usuário é "alynne" e a senha é "123456".
+
+http://127.0.0.1:8000/
+
+.. code-block:: console
+
+   $ http -a alynne:123456 http://127.0.0.1:8000/
+   HTTP/1.1 200 OK
+   Allow: GET, HEAD, OPTIONS
+   Content-Length: 46
+   Content-Type: application/json
+   Date: Thu, 24 Jan 2019 16:07:00 GMT
+   Server: WSGIServer/0.2 CPython/3.6.7
+   Vary: Accept, Cookie
+   X-Frame-Options: SAMEORIGIN
+
+   {
+       "products": "http://127.0.0.1:8000/products/"
+   }
+
+http://127.0.0.1:8000/products/
+
+.. code-block:: console
+
+   $ http -a alynne:123456 http://127.0.0.1:8000/products/
+   HTTP/1.1 200 OK
+   Allow: GET, POST, HEAD, OPTIONS
+   Content-Length: 1222
+   Content-Type: application/json
+   Date: Thu, 24 Jan 2019 16:07:17 GMT
+   Server: WSGIServer/0.2 CPython/3.6.7
+   Vary: Accept, Cookie
+   X-Frame-Options: SAMEORIGIN
+
+   {
+       "count": 4,
+       "next": null,
+       "previous": null,
+       "results": [
+           {
+               "description": "adasds",
+               "name": "teste",
+               "price": 3.14,
+               "url": "http://127.0.0.1:8000/products/1/"
+           }
+           {
+               "description": null,
+               "name": "produto2",
+               "price": 2.0,
+               "url": "http://127.0.0.1:8000/products/2/"
+           },
+           {
+               "description": null,
+               "name": "produto",
+               "price": 1.0,
+               "url": "http://127.0.0.1:8000/products/3/"
+           },
+           {
+               "description": null,
+               "name": "produto",
+               "price": 1.0,
+               "url": "http://127.0.0.1:8000/products/4/"
+           }
+       ]
+   }
+
+http://127.0.0.1:8000/products/1/
+
+.. code-block:: console
+
+   $ http -a alynne:123456 http://127.0.0.1:8000/products/1/
+   HTTP/1.1 200 OK
+   Allow: GET, PUT, PATCH, DELETE, HEAD, OPTIONS
+   Content-Length: 94
+   Content-Type: application/json
+   Date: Thu, 24 Jan 2019 16:07:38 GMT
+   Server: WSGIServer/0.2 CPython/3.6.7
+   Vary: Accept, Cookie
+   X-Frame-Options: SAMEORIGIN
+
+   {
+       "description": "adasds",
+       "name": "teste",
+       "price": 3.14,
+       "url": "http://127.0.0.1:8000/products/1/"
+   }
