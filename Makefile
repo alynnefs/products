@@ -1,7 +1,7 @@
 clean:
 	./manage.py clean_pyc
 
-setup: requirements-dev createsuperuser migrate
+setup: requirements-dev migrate createsuperuser
 
 requirements-dev:
 	pip install -r requirements/dev.txt
