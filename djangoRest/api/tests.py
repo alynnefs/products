@@ -1,9 +1,10 @@
 from rest_framework.request import Request
 from rest_framework.test import (
-    APIClient,
     APIRequestFactory,
     APITestCase
 )
+from django.test import TestCase
+from model_mommy import mommy
 
 from .models import Products
 from .serializers import ProductSerializer
@@ -13,7 +14,6 @@ class BaseViewTest(APITestCase):
     """
     This class creates test data
     """
-    client = APIClient()
 
     @staticmethod
     def create_product(name="", price="", description=""):
@@ -48,3 +48,43 @@ class GetAllProductsTest(BaseViewTest):
         expected = Products.objects.first()
         serialized = ProductSerializer(expected, context=serializer_context)
         self.assertEqual(response.data, serialized.data)    
+
+
+class TestProductsModels(TestCase):
+
+    def test_create_products(self):
+        """
+        This method tests if the objects were created
+        """
+        before = Products.objects.count()
+        mommy.make(Products)
+        after = Products.objects.count()
+        self.assertEqual(before+1, after)
+
+    def test_delete_products(self):
+        """
+        This method tests if the objects were deleted
+        """
+        mommy.make(Products, _quantity=3)
+        before = Products.objects.count()
+        
+        id = Products.objects.first().id
+        Products.objects.filter(id=id).delete()  
+
+        after = Products.objects.count()
+        self.assertEqual(before-1, after)
+
+    def test_update_products(self):
+        """
+        This method tests if the objects were updated
+        """
+        name = 'caderno'
+        new_name = 'livro'
+        mommy.make(Products, name=name)
+        before = Products.objects.first().name
+
+        Products.objects.filter(name=name).update(name=new_name)
+        after = Products.objects.first().name
+
+        self.assertNotEqual(before, after)
+        self.assertEqual(after, 'livro')
