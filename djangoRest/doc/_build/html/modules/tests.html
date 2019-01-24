@@ -39,11 +39,6 @@
 <dt id="api.tests.BaseViewTest">
 <em class="property">class </em><code class="descclassname">api.tests.</code><code class="descname">BaseViewTest</code><span class="sig-paren">(</span><em>methodName='runTest'</em><span class="sig-paren">)</span><a class="headerlink" href="#api.tests.BaseViewTest" title="Permalink to this definition">¶</a></dt>
 <dd><p>This class creates test data</p>
-<dl class="attribute">
-<dt id="api.tests.BaseViewTest.client">
-<code class="descname">client</code><em class="property"> = &lt;rest_framework.test.APIClient object&gt;</em><a class="headerlink" href="#api.tests.BaseViewTest.client" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
 <dl class="staticmethod">
 <dt id="api.tests.BaseViewTest.create_product">
 <em class="property">static </em><code class="descname">create_product</code><span class="sig-paren">(</span><em>name=''</em>, <em>price=''</em>, <em>description=''</em><span class="sig-paren">)</span><a class="headerlink" href="#api.tests.BaseViewTest.create_product" title="Permalink to this definition">¶</a></dt>
@@ -65,6 +60,30 @@
 <dt id="api.tests.GetAllProductsTest.test_get_all_products">
 <code class="descname">test_get_all_products</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#api.tests.GetAllProductsTest.test_get_all_products" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="api.tests.TestProductsModels">
+<em class="property">class </em><code class="descclassname">api.tests.</code><code class="descname">TestProductsModels</code><span class="sig-paren">(</span><em>methodName='runTest'</em><span class="sig-paren">)</span><a class="headerlink" href="#api.tests.TestProductsModels" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class tests create, delet and update</p>
+<dl class="method">
+<dt id="api.tests.TestProductsModels.test_create_products">
+<code class="descname">test_create_products</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#api.tests.TestProductsModels.test_create_products" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method tests if the objects were created</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="api.tests.TestProductsModels.test_delete_products">
+<code class="descname">test_delete_products</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#api.tests.TestProductsModels.test_delete_products" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method tests if the objects were deleted</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="api.tests.TestProductsModels.test_update_products">
+<code class="descname">test_update_products</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#api.tests.TestProductsModels.test_update_products" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method tests if the objects were updated</p>
+</dd></dl>
 
 </dd></dl>
 

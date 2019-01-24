@@ -15,7 +15,6 @@ Welcome to djangoRest's documentation!
    modules/tests.rst
 
 
-
 Indices and tables
 ==================
 

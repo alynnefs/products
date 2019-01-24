@@ -51,7 +51,9 @@ class GetAllProductsTest(BaseViewTest):
 
 
 class TestProductsModels(TestCase):
-
+    """
+    This class tests create, delet and update
+    """
     def test_create_products(self):
         """
         This method tests if the objects were created
