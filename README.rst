@@ -12,6 +12,8 @@ Requisitos
 - Python 3.6.7
 - pip 19.0.1 (python 3.6)
 
+Obs: todos os comandos a seguir devem ser executados na raiz do projeto (pasta products).
+
 Install
 =======
 
@@ -19,7 +21,7 @@ Install
 
     make setup
     
-Durante o setup será solicitado nome de usuário, email e senha.
+Durante o setup será solicitado nome de usuário, email e senha, que serão usados para fazer login no sistema.
 
 Documentação
 =======
@@ -27,6 +29,8 @@ Documentação
 .. code-block:: console
 
     make showdoc
+    
+Está configurado para abrir no Firefox. Caso não tenha instalado, você pode consultar a documentação abrindo esse arquivo: ``djangoRest/doc/_build/html/index.html``
 
 Testes
 =======
