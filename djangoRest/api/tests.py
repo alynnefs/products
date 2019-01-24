@@ -34,6 +34,7 @@ class GetAllProductsTest(BaseViewTest):
     This class tests data creation
     """
     def test_get_all_products(self):
+        print("\nget products")
 
         factory = APIRequestFactory()
         request = factory.get('/')
@@ -58,6 +59,8 @@ class TestProductsModels(TestCase):
         """
         This method tests if the objects were created
         """
+        print("\ncreate objects")
+
         before = Products.objects.count()
         mommy.make(Products)
         after = Products.objects.count()
@@ -67,6 +70,8 @@ class TestProductsModels(TestCase):
         """
         This method tests if the objects were deleted
         """
+        print("\ndelete objects")
+
         mommy.make(Products, _quantity=3)
         before = Products.objects.count()
         
@@ -80,6 +85,8 @@ class TestProductsModels(TestCase):
         """
         This method tests if the objects were updated
         """
+        print("\nupdate objects")
+
         name = 'caderno'
         new_name = 'livro'
         mommy.make(Products, name=name)
